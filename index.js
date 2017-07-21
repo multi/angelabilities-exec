@@ -5,7 +5,9 @@ module.exports = function (angel) {
     var cwd = process.cwd()
     var child = exec(command, {
       cwd: cwd,
-      maxBuffer: process.env.NODE_EXEC_MAX_BUFFER || 5 * 1024 * 1024,
+      maxBuffer: process.env.ANGEL_EXEC_MAX_BUFFER
+        ? parseInt(process.env.ANGEL_EXEC_MAX_BUFFER, 10)
+        : 5 * 1024 * 1024,
       env: Object.assign({}, process.env, {
         FORCE_COLOR: true,
       })
